@@ -1,0 +1,98 @@
+<idea-plugin>
+    <id>SequenceDiagramGW</id>
+    <name>SequenceDiagramGW</name>
+    <description><![CDATA[
+<h3>SequenceDiagramGW for IntelliJ IDEA</h3>
+this plugin is a fork of <a href="http://vanco.github.io/SequencePlugin">SequencePlugin.</a>
+
+
+<p>with this plugin, you can<br>
++ newest! Support comment on export `puml`!
++ generate Simple Sequence Diagram.<br>
++ Navigate the code by click the diagram shape.<br>
++ Delete Class from diagram.<br>
++ Export the diagram as image.<br>
++ Export the diagram as PlantUML file.<br>
++ Exclude classes from diagram by Settings > Tools > Sequence Diagram<br>
++ Smart Interface(experimental)<br>
++ Lambda Expression(experimental)</p>
+ </p>
+
+
+]]></description>
+    <version>3.0.6.1</version>
+    <vendor>Minliang</vendor>
+    <idea-version since-build="223.7571.176"/>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <depends>com.intellij.modules.java</depends>
+
+    <depends>com.intellij.java</depends>
+
+    <depends optional="true" config-file="SequenceDiagram-kotlin.xml">org.jetbrains.kotlin</depends>
+
+    <change-notes/>
+
+    <actions>
+        <action id="SequencePlugin.ShowSequenceDiagram" class="vanstudio.sequence.ShowSequenceAction"
+                icon="SequencePluginIcons.SEQUENCE_ICON"
+                text="Sequence Diagram"
+                description="Generate sequence diagram of the current method">
+            <add-to-group group-id="EditorPopupMenu" anchor="after" relative-to-action="ShowIntentionsGroup"/>
+            <!--            <add-to-group group-id="StructureViewPopupMenu" anchor="after" relative-to-action="RefactoringMenu"/>-->
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+            <keyboard-shortcut first-keystroke="alt S" keymap="$default"/>
+        </action>
+        <!-- <group id="SequencePlugin.SequenceDiagramGroup"
+                class="vanstudio.sequence.ShowSequenceActionGroup"
+                icon="SequencePluginIcons.SEQUENCE_ICON" text="Sequence Diagram..." popup="true">
+ &lt;!&ndash;            <add-to-group group-id="ProjectViewPopupMenu" anchor="before" relative-to-action="AssociateWithFileType"/>&ndash;&gt;
+             <add-to-group group-id="NavBarToolBarOthers" anchor="first"/>
+         </group>-->
+    </actions>
+
+    <extensionPoints>
+        <extensionPoint name="sequenceNavigable" beanClass="com.intellij.lang.LanguageExtensionPoint"
+                        area="IDEA_PROJECT" dynamic="true">
+            <with attribute="implementationClass" implements="vanstudio.sequence.openapi.SequenceNavigable"/>
+        </extensionPoint>
+        <extensionPoint name="generator" beanClass="com.intellij.lang.LanguageExtensionPoint" dynamic="true">
+            <with attribute="implementationClass" implements="vanstudio.sequence.openapi.GeneratorFactory"/>
+        </extensionPoint>
+        <extensionPoint name="actionFinder" beanClass="com.intellij.lang.LanguageExtensionPoint" dynamic="true">
+            <with attribute="implementationClass" implements="vanstudio.sequence.openapi.ActionFinder"/>
+        </extensionPoint>
+        <extensionPoint name="typeFinder" beanClass="com.intellij.lang.LanguageExtensionPoint" dynamic="true">
+            <with attribute="implementationClass" implements="vanstudio.sequence.openapi.ElementTypeFinder"/>
+        </extensionPoint>
+    </extensionPoints>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <applicationConfigurable parentId="tools"
+                                 id="Settings.Sequence.Configuration"
+                                 instance="vanstudio.sequence.config.SequenceSettingsConfigurable"
+                                 displayName="Sequence Diagram GW"/>
+        <applicationService serviceImplementation="vanstudio.sequence.config.SequenceSettingsState"/>
+        <applicationService serviceImplementation="vanstudio.sequence.config.SequenceParamsState"/>
+        <toolWindow id="Sequence Diagram GW" icon="SequencePluginIcons.SEQUENCE_ICON_13" anchor="bottom"
+                    factoryClass="vanstudio.sequence.SequenceToolWindowsFactory" canCloseContents="true"/>
+        <!-- Since idea 2020.3.x -->
+        <notificationGroup displayType="BALLOON" id="Sequence Diagram"/>
+
+        <projectService serviceInterface="vanstudio.sequence.SequenceService"
+                        serviceImplementation="vanstudio.sequence.impl.SequenceServiceImpl"/>
+
+
+    </extensions>
+    <extensions defaultExtensionNs="SequenceDiagramGW">
+        <sequenceNavigable language="JAVA"
+                           implementationClass="vanstudio.sequence.generator.JavaSequenceNavigable"/>
+        <!--        <generator language="JAVA" implementationClass="vanstudio.sequence.generator.JavaGeneratorFactory"/>-->
+        <generator language="UAST" implementationClass="vanstudio.sequence.ext.uast.UastGeneratorFactory"/>
+        <!--        <actionFinder language="JAVA" implementationClass="vanstudio.sequence.generator.JavaActionFinder"/>-->
+        <actionFinder language="UAST" implementationClass="vanstudio.sequence.ext.uast.UastActionFinder"/>
+        <typeFinder language="JAVA" implementationClass="vanstudio.sequence.generator.JavaElementTypeFinder"/>
+    </extensions>
+</idea-plugin>
