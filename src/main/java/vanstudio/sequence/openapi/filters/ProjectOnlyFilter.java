@@ -22,8 +22,8 @@ public class ProjectOnlyFilter implements MethodFilter {
 //    }
 
     public boolean allow(PsiElement psiElement) {
-        return (this._projectClassOnly || !MyPsiUtil.isInProject(psiElement));
-//        return true;
+//        return (this._projectClassOnly || !MyPsiUtil.isInProject(psiElement));
+        return false;
     }
 
     private boolean isInProject(PsiElement psiElement) {
@@ -33,9 +33,7 @@ public class ProjectOnlyFilter implements MethodFilter {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ProjectOnlyFilter that = (ProjectOnlyFilter) o;
-        return _projectClassOnly == that._projectClassOnly;
+        return o instanceof ProjectOnlyFilter;
     }
 
     @Override

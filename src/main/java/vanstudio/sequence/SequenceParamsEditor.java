@@ -28,6 +28,7 @@ public class SequenceParamsEditor extends AnAction {
 
             state.callDepth = dialogWrapper.getCallStackDepth();
             state.projectClassesOnly = dialogWrapper.isProjectClassesOnly();
+//            state.projectClassesOnly = false;
             state.noGetterSetters = dialogWrapper.isNoGetterSetters();
             state.noPrivateMethods = dialogWrapper.isNoPrivateMethods();
             state.noConstructors = dialogWrapper.isNoConstructors();

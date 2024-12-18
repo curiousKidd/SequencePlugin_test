@@ -35,7 +35,7 @@ public class ShowSequenceAction extends AnAction implements DumbAware {
         Presentation presentation = event.getPresentation();
 
         @Nullable PsiElement psiElement = event.getData(CommonDataKeys.PSI_FILE);
-        presentation.setEnabled(isEnabled(psiElement));
+//        presentation.setEnabled(isEnabled(psiElement));
 
     }
 
@@ -52,6 +52,8 @@ public class ShowSequenceAction extends AnAction implements DumbAware {
 
         PsiElement psiElement = event.getData(CommonDataKeys.PSI_ELEMENT);
         final PsiFile psiFile = event.getData(CommonDataKeys.PSI_FILE);
+
+        psiElement = null;
 
         if (psiElement == null) {
             final Caret caret = event.getData(CommonDataKeys.CARET);

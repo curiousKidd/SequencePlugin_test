@@ -295,7 +295,7 @@ public class SequencePanel extends JPanel implements ConfigListener {
     @Override
     public void configChanged() {
         // do nothing
-        //_sequenceParams = loadSequenceParams();
+//        _sequenceParams = loadSequenceParams();
     }
 
     private class ReGenerateAction extends AnAction {
