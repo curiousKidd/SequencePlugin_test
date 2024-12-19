@@ -53,8 +53,6 @@ public class ShowSequenceAction extends AnAction implements DumbAware {
         PsiElement psiElement = event.getData(CommonDataKeys.PSI_ELEMENT);
         final PsiFile psiFile = event.getData(CommonDataKeys.PSI_FILE);
 
-        psiElement = null;
-
         if (psiElement == null) {
             final Caret caret = event.getData(CommonDataKeys.CARET);
 
@@ -77,6 +75,8 @@ public class ShowSequenceAction extends AnAction implements DumbAware {
                 }
             }
         }
+
+        psiElement = null;
 
         if (psiElement != null) {
             plugin.showSequence(psiElement);
@@ -124,7 +124,9 @@ public class ShowSequenceAction extends AnAction implements DumbAware {
                 }
             };
 
-            JBPopupFactory.getInstance().createActionGroupPopup("Choose Method ...", actionGroup, event.getDataContext(),
+
+            // 여기부터 봅시다잇
+            JBPopupFactory.getInstance().createActionGroupPopup("Choose Method TEST...", actionGroup, event.getDataContext(),
                     null, false).showInBestPositionFor(event.getDataContext());
         }).submit(NonUrgentExecutor.getInstance());
     }
