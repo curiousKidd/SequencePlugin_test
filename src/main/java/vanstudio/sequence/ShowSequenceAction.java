@@ -126,6 +126,7 @@ public class ShowSequenceAction extends AnAction implements DumbAware {
 
 
             // 여기부터 봅시다잇
+            // 왜 안나와,,,,,,,
             JBPopupFactory.getInstance().createActionGroupPopup("Choose Method TEST...", actionGroup, event.getDataContext(),
                     null, false).showInBestPositionFor(event.getDataContext());
 //                    .showInBestPositionFor(event.getDataContext());
