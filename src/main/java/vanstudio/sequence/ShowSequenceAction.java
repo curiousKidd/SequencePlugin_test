@@ -53,6 +53,8 @@ public class ShowSequenceAction extends AnAction implements DumbAware {
         PsiElement psiElement = event.getData(CommonDataKeys.PSI_ELEMENT);
         final PsiFile psiFile = event.getData(CommonDataKeys.PSI_FILE);
 
+
+
         if (psiElement == null) {
             final Caret caret = event.getData(CommonDataKeys.CARET);
 
@@ -127,9 +129,10 @@ public class ShowSequenceAction extends AnAction implements DumbAware {
 
             // 여기부터 봅시다잇
             // 왜 안나와,,,,,,,
-            JBPopupFactory.getInstance().createActionGroupPopup("Choose Method TEST...", actionGroup, event.getDataContext(),
+            JBPopupFactory.getInstance().createActionGroupPopup("TEST", actionGroup, event.getDataContext(),
                     null, false).showInBestPositionFor(event.getDataContext());
 //                    .showInBestPositionFor(event.getDataContext());
+            // 로그를 찍어볼 수 있으면... 바로 찾을 수 있을 것 같다
         }).submit(NonUrgentExecutor.getInstance());
     }
 
