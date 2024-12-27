@@ -133,6 +133,7 @@ public class ShowSequenceAction extends AnAction implements DumbAware {
                     null, false).showInBestPositionFor(event.getDataContext());
 //                    .showInBestPositionFor(event.getDataContext());
             // 로그를 찍어볼 수 있으면... 바로 찾을 수 있을 것 같다
+            //AnActionEvent 이게 뭔지 찾아봐야 할 것 같다
         }).submit(NonUrgentExecutor.getInstance());
     }
 
