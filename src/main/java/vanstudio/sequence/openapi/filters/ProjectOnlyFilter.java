@@ -23,7 +23,7 @@ public class ProjectOnlyFilter implements MethodFilter {
 
     public boolean allow(PsiElement psiElement) {
 //        return (this._projectClassOnly || !MyPsiUtil.isInProject(psiElement));
-        return false;
+        return true;
     }
 
     private boolean isInProject(PsiElement psiElement) {

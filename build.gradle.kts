@@ -98,4 +98,7 @@ tasks {
 dependencies {
 //    implementation("ar.com.hjg:pngj:2.1.0")
     implementation("org.apache.xmlgraphics:batik-svggen:1.14")
+
+    testImplementation("org.mockito:mockito-core:5.5.0")
+    testImplementation("org.mockito:mockito-junit-jupiter:5.5.0")
 }

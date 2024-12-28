@@ -84,7 +84,9 @@ public class ShowSequenceAction extends AnAction implements DumbAware {
             plugin.showSequence(psiElement);
         } else {
             if (psiFile != null) {
-                chooseMethodToGenerate(event, plugin, psiFile, project);
+                psiElement = event.getData(CommonDataKeys.PSI_ELEMENT);
+                plugin.showSequence(psiElement);
+//                chooseMethodToGenerate(event, plugin, psiFile, project);
             }
         }
     }
@@ -129,7 +131,7 @@ public class ShowSequenceAction extends AnAction implements DumbAware {
 
             // 여기부터 봅시다잇
             // 왜 안나와,,,,,,,
-            JBPopupFactory.getInstance().createActionGroupPopup("TEST", actionGroup, event.getDataContext(),
+            JBPopupFactory.getInstance().createActionGroupPopup(psiElement.getText(), actionGroup, event.getDataContext(),
                     null, false).showInBestPositionFor(event.getDataContext());
 //                    .showInBestPositionFor(event.getDataContext());
             // 로그를 찍어볼 수 있으면... 바로 찾을 수 있을 것 같다
