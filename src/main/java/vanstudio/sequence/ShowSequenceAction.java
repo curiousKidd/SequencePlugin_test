@@ -50,7 +50,10 @@ public class ShowSequenceAction extends AnAction implements DumbAware {
 
         SequenceService plugin = project.getService(SequenceService.class);
 
+        // 프로젝트 내부 구성 요소
         PsiElement psiElement = event.getData(CommonDataKeys.PSI_ELEMENT);
+
+        // 프로젝트 파일
         final PsiFile psiFile = event.getData(CommonDataKeys.PSI_FILE);
 
 
@@ -86,6 +89,7 @@ public class ShowSequenceAction extends AnAction implements DumbAware {
             if (psiFile != null) {
                 psiElement = event.getData(CommonDataKeys.PSI_ELEMENT);
                 plugin.showSequence(psiElement);
+                // 시퀀스를 탐색해야할 메소드를 선택한다
 //                chooseMethodToGenerate(event, plugin, psiFile, project);
             }
         }
