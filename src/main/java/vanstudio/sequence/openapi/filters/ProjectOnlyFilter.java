@@ -15,15 +15,11 @@ public class ProjectOnlyFilter implements MethodFilter {
         _projectClassOnly = projectClassOnly;
     }
 
-//    public boolean allow(PsiElement psiElement) {
-//        if(_projectClassOnly && isInProject(psiElement))
-//            return false;
-//        return true;
-//    }
-
     public boolean allow(PsiElement psiElement) {
-//        return (this._projectClassOnly || !MyPsiUtil.isInProject(psiElement));
-        return true;
+        if (_projectClassOnly && isInProject(psiElement)) {
+            return false; // 프로젝트 외부의 클래스는 허용하지 않음
+        }
+        return true; // 허용
     }
 
     private boolean isInProject(PsiElement psiElement) {
@@ -33,11 +29,14 @@ public class ProjectOnlyFilter implements MethodFilter {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        return o instanceof ProjectOnlyFilter;
+        if (!(o instanceof ProjectOnlyFilter)) return false;
+        ProjectOnlyFilter that = (ProjectOnlyFilter) o;
+        return _projectClassOnly == that._projectClassOnly;
     }
 
     @Override
     public int hashCode() {
-        return 0;
+        return Boolean.hashCode(_projectClassOnly);
     }
 }
+
